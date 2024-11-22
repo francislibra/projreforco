@@ -1,0 +1,63 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Monitor de Resultados</title>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 20px; }
+                table { border-collapse: collapse; width: 100%; }
+                th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                tr:nth-child(even) { background-color: #f2f2f2; }
+                tr.best { background-color: #dff0d8; }
+                th { background-color: #4CAF50; color: white; }
+            </style>
+            <script>
+                function updateResults() {
+                    fetch('resultados.json')
+                        .then(response => response.json())
+                        .then(data => {
+                            document.getElementById('episode').textContent = data.episode;
+                            document.getElementById('best-moves').textContent = data.best_moves;
+                            
+                            const tbody = document.getElementById('results-body');
+                            tbody.innerHTML = '';
+                            
+                            data.results.forEach(result => {
+                                const row = document.createElement('tr');
+                                if (result.is_best) row.classList.add('best');
+                                
+                                row.innerHTML = `
+                                    <td>${result.episode}</td>
+                                    <td>${result.moves}</td>
+                                    <td>${result.time}s</td>
+                                    <td>${result.path}</td>
+                                `;
+                                
+                                tbody.appendChild(row);
+                            });
+                        });
+                }
+                
+                setInterval(updateResults, 1000);
+                updateResults();
+            </script>
+        </head>
+        <body>
+            <h1>Monitor de Resultados</h1>
+            <p>Episódio atual: <span id="episode">0</span></p>
+            <p>Melhor número de movimentos: <span id="best-moves">∞</span></p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Episódio</th>
+                        <th>Movimentos</th>
+                        <th>Tempo</th>
+                        <th>Caminho</th>
+                    </tr>
+                </thead>
+                <tbody id="results-body">
+                </tbody>
+            </table>
+        </body>
+        </html>
+        
