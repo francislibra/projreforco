@@ -71,4 +71,3 @@ projreforco/
 ```
 ```
 
-Gostaria que eu adicionasse mais alguma seção ou dicas específicas para Windows?
