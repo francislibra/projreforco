@@ -1,4 +1,3 @@
-```markdown
 # Guia de Instalação do Projeto (Windows)
 
 ## Pré-requisitos
