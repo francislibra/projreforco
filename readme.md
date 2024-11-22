@@ -69,5 +69,5 @@ projreforco/
 ├── requirements.txt # Dependências do projeto
 └── app.py                # Arquivo principal da aplicação
 ```
-```
+
 
